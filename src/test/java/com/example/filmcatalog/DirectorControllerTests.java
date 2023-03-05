@@ -51,9 +51,11 @@ public class DirectorControllerTests {
                 createFilm("Transformers", GenreEnum.ACTION, 5),
                 createFilm("Shrek 1", GenreEnum.HORROR, 10),
                 createFilm("Shrek 3", GenreEnum.ROMANCE, 10)));
-        HttpEntity<String> httpEntity = new HttpEntity<>(new ObjectMapper().writeValueAsString(expectedDirector), httpHeaders);
+        HttpEntity<String> httpEntity = new HttpEntity<>(new ObjectMapper().writeValueAsString(expectedDirector),
+                httpHeaders);
         ResponseEntity<Director> directorResponseEntity =
-                testRestTemplate.exchange(String.format("http://localhost:%d/director", port), HttpMethod.POST, httpEntity, Director.class);
+                testRestTemplate.exchange(String.format("http://localhost:%d/director", port),
+                        HttpMethod.POST, httpEntity, Director.class);
         Director actualDirector = directorResponseEntity.getBody();
 
 
@@ -61,7 +63,8 @@ public class DirectorControllerTests {
         assertNotNull(actualDirector);
         assertNotNull(directorRepository.findById(actualDirector.getUuid()));
         assertNotNull(directorService.getDirector(actualDirector.getUuid()));
-        AssertionsForClassTypes.assertThat(actualDirector.getFilmList().size()).isEqualTo(expectedDirector.getFilmList().size());
+        AssertionsForClassTypes.assertThat(actualDirector.getFilmList().size()).
+                isEqualTo(expectedDirector.getFilmList().size());
         assertNotNull(directorRepository.findById(actualDirector.getUuid()));
         assertThat(actualDirector.getName()).isEqualTo(expectedDirector.getName());
         assertThat(actualDirector.getAge()).isEqualTo(expectedDirector.getAge());
@@ -81,7 +84,8 @@ public class DirectorControllerTests {
                 createFilm("Cars 3", GenreEnum.ROMANCE, 10)));
         directorRepository.save(expectedDirector);
         ResponseEntity<Director> directorResponseEntity =
-                testRestTemplate.getForEntity(String.format("http://localhost:%d/director", port) + "?directorUuid={directorUuid}", Director.class, expectedDirector.getUuid());
+                testRestTemplate.getForEntity(String.format("http://localhost:%d/director", port)
+                        + "?directorUuid={directorUuid}", Director.class, expectedDirector.getUuid());
         Director actualDirector = directorResponseEntity.getBody();
         assertThat(directorResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(actualDirector).isEqualTo(expectedDirector);
