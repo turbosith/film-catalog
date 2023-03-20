@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Список фильмов</title>
+</head>
+<body>
+
+
+<table cellpadding="15" border="1">
+  <tr th:each="film : ${listOfFilms}">
+    <td th:text="${film.uuid}"></td>
+    <td th:text="${film.title}"></td>
+    <td th:text="${film.genre}"></td>
+    <td th:text="${film.rating}"></td>
+    <td>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
