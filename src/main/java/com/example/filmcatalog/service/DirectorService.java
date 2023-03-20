@@ -1,11 +1,11 @@
 package com.example.filmcatalog.service;
 
-import com.example.filmcatalog.model.Director;
+import com.example.filmcatalog.dto.DirectorDto;
 
 import java.util.UUID;
 
 public interface DirectorService {
-    Director getDirector(UUID directorUuid);
+    DirectorDto getDirector(UUID directorUuid);
 
-    Director saveDirector(Director director);
+    void saveDirector(DirectorDto director);
 }
