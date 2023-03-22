@@ -1,17 +1,24 @@
 package com.example.filmcatalog.service.impl;
 
 import com.example.filmcatalog.service.CounterService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+
+@Service
+@RequiredArgsConstructor
 public class CounterServiceImpl implements CounterService {
-    private static int counter=0;
+    private AtomicInteger counter=new AtomicInteger(0);
     @Override
     public void increment() {
-        counter++;
+        counter.incrementAndGet();
 
     }
 
     @Override
-    public int getValue() {
+    public AtomicInteger getValue() {
         return counter;
     }
 }
